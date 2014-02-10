@@ -2,6 +2,7 @@
 #COSI236B - PA03
 #2/3/2014
 
+require_relative 'maze_search'
 
 class Maze
 	attr_accessor :n, :m, :maze
@@ -21,6 +22,16 @@ class Maze
 				i+=1
 			end
 		end
+	end
+
+	def getCoord(x,y)
+		#Returns the value 0 or 1 at coordinates (x,y) in the maze
+		return @maze[x][y]
+	end
+
+	def isWall?(coord)
+		#Checks if given coordinates are a wall
+		return getCoord(coord[0],coord[1])=='1'
 	end
 
 	def display
@@ -67,4 +78,9 @@ end
 
 maze = Maze.new(4,4)
 maze.load("111111111100010001111010101100010101101110101100000101111011101100000101111111111")
-maze.display
+#maze.display
+
+problem = MazeSearch.new(Cell.new([1,1],nil),Cell.new([3,1],nil),maze)
+cell = Cell.new([3,1],nil)
+
+print problem.getSuccessors Cell.new([3,6],nil)
